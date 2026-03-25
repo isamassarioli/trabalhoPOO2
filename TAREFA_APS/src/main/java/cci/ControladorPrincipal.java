@@ -7,10 +7,15 @@ import javax.swing.JOptionPane;
 import cgt.AplGerenciarCurso;
 import cgt.AplGerenciarPessoas;
 import ciu.JanCadAluno;
+import ciu.JanCadAlunoo;
 import ciu.JanCadCurso;
+import ciu.JanCadCursoo;
 import ciu.JanCadProfessor;
+import ciu.JanCadProfessorr;
 import ciu.JanCadTurma;
+import ciu.JanCadTurmaa;
 import ciu.JanPrincipal;
+import ciu.JanPrincipall;
 
 import java.util.Date;
 
@@ -20,11 +25,11 @@ public class ControladorPrincipal {
     /**
      * @param args the command line arguments
      */
-    private static JanPrincipal janPrincipal;
-    private static JanCadCurso janCadCurso;
-    private static JanCadTurma janCadTurma;
-    private static JanCadAluno janCadAluno;
-    private static JanCadProfessor janCadProfessor;
+    private static JanPrincipall janPrincipal;
+    private static JanCadCursoo janCadCurso;
+    private static JanCadTurmaa janCadTurma;
+    private static JanCadAlunoo janCadAluno;
+    private static JanCadProfessorr janCadProfessor;
     private static AplGerenciarCurso aplGerenciarCurso;
     private static AplGerenciarPessoas aplGerenciarPessoas;
     private static final ControladorPrincipal controlador = new ControladorPrincipal();
@@ -38,14 +43,14 @@ public class ControladorPrincipal {
 
     public static void exibirJanPrincipal() {
         if (janPrincipal == null)
-            janPrincipal = new JanPrincipal(controlador);
+            janPrincipal = new JanPrincipall(controlador);
         janPrincipal.setVisible(true);
 
     }
 
     public static void exibirJanCadCurso() {
         if (janCadCurso == null)
-            janCadCurso = new JanCadCurso(controlador);
+            janCadCurso = new JanCadCursoo(controlador);
         janPrincipal.setVisible(false);
         janCadCurso.setVisible(true);
 
@@ -53,7 +58,7 @@ public class ControladorPrincipal {
 
     public static void exibirJanCadAluno() {
         if (janCadAluno == null)
-            janCadAluno = new JanCadAluno(controlador);
+            janCadAluno = new JanCadAlunoo(controlador);
         janPrincipal.setVisible(false);
         janCadAluno.setVisible(true);
 
@@ -61,7 +66,7 @@ public class ControladorPrincipal {
 
     public static void exibirJanCadProfessor() {
         if (janCadProfessor == null)
-            janCadProfessor = new JanCadProfessor(controlador);
+            janCadProfessor = new JanCadProfessorr(controlador);
         janPrincipal.setVisible(false);
         janCadProfessor.setVisible(true);
 
@@ -69,7 +74,7 @@ public class ControladorPrincipal {
 
     public static void exibirJanCadTurma() {
         if (janCadTurma == null)
-            janCadTurma = new JanCadTurma(controlador);
+            janCadTurma = new JanCadTurmaa(controlador);
         janPrincipal.setVisible(false);
         janCadTurma.setVisible(true);
 

@@ -4,6 +4,8 @@
  */
 package ciu;
 
+import cci.ControladorPrincipal;
+
 /**
  *
  * @author 2024122760199
@@ -15,7 +17,7 @@ public class JanPrincipall extends javax.swing.JFrame {
     /**
      * Creates new form JanCadAlunoo
      */
-    public JanPrincipall() {
+    public JanPrincipall(ControladorPrincipal controlador) {
         initComponents();
     }
 
@@ -30,55 +32,91 @@ public class JanPrincipall extends javax.swing.JFrame {
 
         jOptionPane1 = new javax.swing.JOptionPane();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuHome = new javax.swing.JMenu();
+        jMenuCadastrar = new javax.swing.JMenu();
+        jMenuItemAluno = new javax.swing.JMenuItem();
+        jMenuItemCurso = new javax.swing.JMenuItem();
+        jMenuItemProf = new javax.swing.JMenuItem();
+        jMenuItemTurma = new javax.swing.JMenuItem();
+        jMenuConsultas = new javax.swing.JMenu();
+        jMenuItemAlunoList = new javax.swing.JMenuItem();
+        jMenuItemProfList = new javax.swing.JMenuItem();
+        jMenuItemGradeCurso = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
+        jMenuItem6.setText("jMenuItem6");
+
+        jMenuItem7.setText("jMenuItem7");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Clip path group (2).png"))); // NOI18N
-        jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jMenu4.setIconTextGap(0);
-        jMenu4.setMinimumSize(new java.awt.Dimension(30, 10));
-        jMenu4.setPreferredSize(new java.awt.Dimension(30, 10));
-        jMenuBar1.add(jMenu4);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/painel.png"))); // NOI18N
 
-        jMenu5.setText("Cadastrar");
+        jMenuHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Clip path group (2).png"))); // NOI18N
+        jMenuHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenuHome.setIconTextGap(0);
+        jMenuHome.setMinimumSize(new java.awt.Dimension(30, 10));
+        jMenuHome.setPreferredSize(new java.awt.Dimension(30, 10));
+        jMenuBar1.add(jMenuHome);
 
-        jMenuItem1.setText("Novo Aluno");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCadastrar.setText("Cadastrar");
+
+        jMenuItemAluno.setText("Novo Aluno");
+        jMenuItemAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemAlunoActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem1);
+        jMenuCadastrar.add(jMenuItemAluno);
 
-        jMenuItem2.setText("Novo Curso");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCurso.setText("Novo Curso");
+        jMenuItemCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemCursoActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem2);
+        jMenuCadastrar.add(jMenuItemCurso);
 
-        jMenuItem4.setText("Novo Professor");
-        jMenu5.add(jMenuItem4);
-
-        jMenuItem5.setText("Nova Turma");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemProf.setText("Novo Professor");
+        jMenuItemProf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMenuItemProfActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem5);
+        jMenuCadastrar.add(jMenuItemProf);
 
-        jMenuBar1.add(jMenu5);
+        jMenuItemTurma.setText("Nova Turma");
+        jMenuItemTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTurmaActionPerformed(evt);
+            }
+        });
+        jMenuCadastrar.add(jMenuItemTurma);
+
+        jMenuBar1.add(jMenuCadastrar);
+
+        jMenuConsultas.setText("Consultas");
+
+        jMenuItemAlunoList.setText("Listar Alunos");
+        jMenuItemAlunoList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAlunoListActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuItemAlunoList);
+
+        jMenuItemProfList.setText("Listar Professores");
+        jMenuConsultas.add(jMenuItemProfList);
+
+        jMenuItemGradeCurso.setText("Grade de Cursos");
+        jMenuConsultas.add(jMenuItemGradeCurso);
+
+        jMenuBar1.add(jMenuConsultas);
 
         setJMenuBar(jMenuBar1);
 
@@ -86,38 +124,53 @@ public class JanPrincipall extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 364, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jMenuItemAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlunoActionPerformed
+        ControladorPrincipal.exibirJanCadAluno();
+    }//GEN-LAST:event_jMenuItemAlunoActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jMenuItemCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCursoActionPerformed
+        ControladorPrincipal.exibirJanCadCurso();
+    }//GEN-LAST:event_jMenuItemCursoActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void jMenuItemTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTurmaActionPerformed
+        ControladorPrincipal.exibirJanCadTurma();
+          }//GEN-LAST:event_jMenuItemTurmaActionPerformed
+
+    private void jMenuItemAlunoListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlunoListActionPerformed
+    }//GEN-LAST:event_jMenuItemAlunoListActionPerformed
+
+    private void jMenuItemProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProfActionPerformed
+ 
+        ControladorPrincipal.exibirJanCadProfessor();
+    }//GEN-LAST:event_jMenuItemProfActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenu jMenuCadastrar;
+    private javax.swing.JMenu jMenuConsultas;
+    private javax.swing.JMenu jMenuHome;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItemAluno;
+    private javax.swing.JMenuItem jMenuItemAlunoList;
+    private javax.swing.JMenuItem jMenuItemCurso;
+    private javax.swing.JMenuItem jMenuItemGradeCurso;
+    private javax.swing.JMenuItem jMenuItemProf;
+    private javax.swing.JMenuItem jMenuItemProfList;
+    private javax.swing.JMenuItem jMenuItemTurma;
     private javax.swing.JOptionPane jOptionPane1;
     // End of variables declaration//GEN-END:variables
 }
