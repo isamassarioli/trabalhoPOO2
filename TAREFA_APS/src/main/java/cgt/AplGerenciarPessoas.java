@@ -2,40 +2,42 @@ package cgt;
 
 import cdp.Aluno;
 import cdp.Professor;
+import cgd.AlunoDAO;
+import cgd.ProfessorDAO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AplGerenciarPessoas {
-    private final ArrayList<Aluno> lstAlunos = new ArrayList();
+    private final AlunoDAO alunoDAO = new AlunoDAO();
+    private final ProfessorDAO professorDAO = new ProfessorDAO();
 
     public int criarAluno(String nome, Date dataNascimento, long CPF){
         if (nome.length()>3){
             Aluno novoAluno = new Aluno(nome, dataNascimento, CPF);
-            lstAlunos.add(novoAluno);
+            alunoDAO.save(novoAluno);
             return 0;
         }
         else
             return 1;
     }
-
-    private final ArrayList<Professor> lstProfessores = new ArrayList();
 
     public int criarProfessor(String nome, Date dataNascimento, long CPF, String titulacao){
         if (nome.length()>3){
             Professor novoProf = new Professor(nome, dataNascimento, CPF, titulacao);
-            lstProfessores.add(novoProf);
+            professorDAO.save(novoProf);
             return 0;
         }
         else
             return 1;
     }
     
-    public ArrayList<Aluno> listarAlunos(){
-        return lstAlunos;
+    public List<Aluno> listarAlunos(){
+        return alunoDAO.getAll();
     }
     
-    public ArrayList<Professor> listarProfessores(){
-        return lstProfessores;
+    public List<Professor> listarProfessores(){
+        return professorDAO.getAll();
     }
 }

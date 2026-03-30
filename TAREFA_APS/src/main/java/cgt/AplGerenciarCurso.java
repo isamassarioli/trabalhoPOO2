@@ -3,6 +3,7 @@ package cgt;
 import java.util.ArrayList;
 import java.util.Date;
 import cgd.CursoDAO;
+import cgd.TurmaDAO;
 
 import cdp.Curso;
 import cdp.Turma;
@@ -10,6 +11,7 @@ import cdp.Turma;
 
 public class AplGerenciarCurso {
     private final CursoDAO cursoDAO = new CursoDAO();
+    private final TurmaDAO turmaDAO = new TurmaDAO();
 
     public int criarCurso(int IdCurso, String nome, int cargaHoraria){
         if (nome.length()>3){
@@ -21,12 +23,9 @@ public class AplGerenciarCurso {
             return 1;
     }
 
-    private final ArrayList<Turma> lstTurmas = new ArrayList();
-
     public int criarTurma(String horario, int limiteAlunos, boolean fechada, Date dataInicio, Date dataFim){
         if (horario.length()>3){
             Turma novaTurma = new Turma(horario, limiteAlunos, fechada, dataInicio, dataFim);
-            lstTurmas.add(novaTurma);
             return 0;
         }
         else

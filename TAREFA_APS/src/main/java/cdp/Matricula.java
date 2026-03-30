@@ -10,4 +10,20 @@ public class Matricula {
         this.nota = nota;
         this.dataMatricula = dataMatricula;
     }
+
+    public int getNota() {
+        return nota;
+    }
+
+    public Date getDataMatricula() {
+        return dataMatricula;
+    }
+
+    public void setNota(int nota) {
+        this.nota = nota;
+    }
+
+    public void setDataMatricula(Date dataMatricula) {
+        this.dataMatricula = dataMatricula;
+    }
 }

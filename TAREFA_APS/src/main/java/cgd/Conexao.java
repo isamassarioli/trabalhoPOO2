@@ -20,10 +20,16 @@ public class Conexao {
            String url = "jdbc:postgresql://localhost:5432/" + banco;
            Class.forName("org.postgresql.Driver");
            conexao = DriverManager.getConnection(url, usuario, senha);
+           System.out.println("✓ Conexão estabelecida com sucesso ao banco: " + banco);
        } catch (ClassNotFoundException e) {
-           System.out.println("Erro: ODBC Não encontrado.\n" + e.getMessage());
+           System.out.println("❌ Erro: Driver PostgreSQL não encontrado.\n" + e.getMessage());
+           e.printStackTrace();
        } catch (SQLException e) {
-           System.out.println("Erro: SQL inválido.\n" + e.getMessage());
+           System.out.println("❌ Erro de conexão com banco de dados.");
+           System.out.println("   Banco: " + banco);
+           System.out.println("   Usuário: " + usuario);
+           System.out.println("   Mensagem: " + e.getMessage());
+           e.printStackTrace();
        }
        return conexao;
    }
