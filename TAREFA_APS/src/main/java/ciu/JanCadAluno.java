@@ -21,6 +21,57 @@ public class JanCadAluno extends javax.swing.JFrame {
     public JanCadAluno(ControladorPrincipal controlador) {
         this.controlador = controlador;
         initComponents();
+        setupPlaceholders();
+    }
+    
+    private void setupPlaceholders() {
+        // Listener para Nome
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField2.getText().equals("Insira o Nome")) {
+                    jTextField2.setText("");
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField2.getText().isEmpty()) {
+                    jTextField2.setText("Insira o Nome");
+                }
+            }
+        });
+        
+        // Listener para CPF
+        jTextField7.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField7.getText().equals("000.000.000-00")) {
+                    jTextField7.setText("");
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField7.getText().isEmpty()) {
+                    jTextField7.setText("000.000.000-00");
+                }
+            }
+        });
+        
+        // Listener para Data
+        jTextField9.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField9.getText().equals("AAAA-MM-DD")) {
+                    jTextField9.setText("");
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField9.getText().isEmpty()) {
+                    jTextField9.setText("AAAA-MM-DD");
+                }
+            }
+        });
     }
 
     /**
@@ -158,12 +209,48 @@ public class JanCadAluno extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            String nome = jTextField2.getText();
-            long cpf = Long.parseLong(jTextField7.getText());
-            java.sql.Date data = java.sql.Date.valueOf(jTextField9.getText());
+            String nome = jTextField2.getText().trim();
+            String cpfRaw = jTextField7.getText().trim();
+            String dataText = jTextField9.getText().trim();
+            
+            // Validar Nome
+            if (nome.isEmpty() || nome.equals("Insira o Nome")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite o nome do aluno.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // Validar CPF - remover caracteres especiais
+            String cpfText = cpfRaw.replaceAll("[^0-9]", "");
+            if (cpfText.isEmpty() || cpfRaw.equals("000.000.000-00")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite um CPF válido.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (cpfText.length() < 11) {
+                javax.swing.JOptionPane.showMessageDialog(this, "CPF deve ter 11 dígitos.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // Validar Data
+            if (dataText.isEmpty() || dataText.equals("AAAA-MM-DD")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite a data de nascimento no formato AAAA-MM-DD.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // Parse dos valores
+            long cpf = Long.parseLong(cpfText);
+            java.sql.Date data = java.sql.Date.valueOf(dataText);
+            
+            System.out.println("DEBUG: Nome=" + nome + ", CPF=" + cpf + ", Data=" + data);
             controlador.cadastrarAluno(nome, data, cpf);
+        } catch (java.util.concurrent.CancellationException ex) {
+            // Ignore
+        } catch (NumberFormatException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao processar dados: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (java.time.format.DateTimeParseException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Data inválida. Use o formato AAAA-MM-DD.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro nos dados do aluno: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro: " + (ex.getMessage() != null ? ex.getMessage() : ex.toString()), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

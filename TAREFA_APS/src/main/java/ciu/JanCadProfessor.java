@@ -21,6 +21,73 @@ public class JanCadProfessor extends javax.swing.JDialog {
     public JanCadProfessor(ControladorPrincipal parent) {
         this.controlador = parent;
         initComponents();
+        setupPlaceholders();
+    }
+    
+    private void setupPlaceholders() {
+        // Listener para Nome
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField2.getText().equals("Insira o Nome")) {
+                    jTextField2.setText("");
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField2.getText().isEmpty()) {
+                    jTextField2.setText("Insira o Nome");
+                }
+            }
+        });
+        
+        // Listener para CPF
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField3.getText().equals("000.000.000-00")) {
+                    jTextField3.setText("");
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField3.getText().isEmpty()) {
+                    jTextField3.setText("000.000.000-00");
+                }
+            }
+        });
+        
+        // Listener para Título
+        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField4.getText().equals("Doutor")) {
+                    jTextField4.setText("");
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField4.getText().isEmpty()) {
+                    jTextField4.setText("Doutor");
+                }
+            }
+        });
+        
+        // Listener para Data
+        jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (jTextField5.getText().equals("AAAA-MM-DD")) {
+                    jTextField5.setText("");
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (jTextField5.getText().isEmpty()) {
+                    jTextField5.setText("AAAA-MM-DD");
+                }
+            }
+        });
     }
 
     /**
@@ -187,13 +254,55 @@ public class JanCadProfessor extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            String nome = jTextField2.getText();
-            long cpf = Long.parseLong(jTextField3.getText());
-            String titulo = jTextField4.getText();
-            java.sql.Date data = java.sql.Date.valueOf(jTextField5.getText());
+            String nome = jTextField2.getText().trim();
+            String cpfRaw = jTextField3.getText().trim();
+            String titulo = jTextField4.getText().trim();
+            String dataText = jTextField5.getText().trim();
+            
+            // Validar Nome
+            if (nome.isEmpty() || nome.equals("Insira o Nome")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite o nome do professor.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // Validar CPF
+            String cpfText = cpfRaw.replaceAll("[^0-9]", "");
+            if (cpfText.isEmpty() || cpfRaw.equals("000.000.000-00")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite um CPF válido.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (cpfText.length() < 11) {
+                javax.swing.JOptionPane.showMessageDialog(this, "CPF deve ter 11 dígitos.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // Validar Título
+            if (titulo.isEmpty() || titulo.equals("Doutor")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite o título.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // Validar Data
+            if (dataText.isEmpty() || dataText.equals("AAAA-MM-DD")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite a data de nascimento no formato AAAA-MM-DD.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // Parse dos valores
+            long cpf = Long.parseLong(cpfText);
+            java.sql.Date data = java.sql.Date.valueOf(dataText);
+            
+            System.out.println("DEBUG: Nome=" + nome + ", CPF=" + cpf + ", Título=" + titulo + ", Data=" + data);
             controlador.cadastrarProfessor(nome, data, cpf, titulo);
+        } catch (java.util.concurrent.CancellationException ex) {
+            // Ignore
+        } catch (NumberFormatException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao processar dados: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (java.time.format.DateTimeParseException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Data inválida. Use o formato AAAA-MM-DD.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro nos dados do professor: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro: " + (ex.getMessage() != null ? ex.getMessage() : ex.toString()), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

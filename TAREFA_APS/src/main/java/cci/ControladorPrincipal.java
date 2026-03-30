@@ -11,6 +11,8 @@ import ciu.JanCadCurso;
 import ciu.JanCadProfessor;
 import ciu.JanCadTurma;
 import ciu.JanPrincipal;
+import ciu.JanListAluno;
+import ciu.JanListProf;
 
 import java.util.Date;
 
@@ -25,6 +27,8 @@ public class ControladorPrincipal {
     private static JanCadTurma janCadTurma;
     private static JanCadAluno janCadAluno;
     private static JanCadProfessor janCadProfessor;
+    private static JanListAluno janListAluno;
+    private static JanListProf janListProf;
     private static AplGerenciarCurso aplGerenciarCurso;
     private static AplGerenciarPessoas aplGerenciarPessoas;
     private static final ControladorPrincipal controlador = new ControladorPrincipal();
@@ -72,7 +76,26 @@ public class ControladorPrincipal {
             janCadTurma = new JanCadTurma(controlador);
         janPrincipal.setVisible(false);
         janCadTurma.setVisible(true);
+    }
 
+    public static void exibirJanListAluno() {
+        if (aplGerenciarPessoas == null)
+            aplGerenciarPessoas = new AplGerenciarPessoas();
+        
+        if (janListAluno == null)
+            janListAluno = new JanListAluno(aplGerenciarPessoas);
+        janPrincipal.setVisible(false);
+        janListAluno.setVisible(true);
+    }
+
+    public static void exibirJanListProf() {
+        if (aplGerenciarPessoas == null)
+            aplGerenciarPessoas = new AplGerenciarPessoas();
+        
+        if (janListProf == null)
+            janListProf = new JanListProf(aplGerenciarPessoas);
+        janPrincipal.setVisible(false);
+        janListProf.setVisible(true);
     }
 
     public void cadastrarCurso(int IdCurso, String nome, int cargaHoraria) {

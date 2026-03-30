@@ -30,4 +30,12 @@ public class AplGerenciarPessoas {
         else
             return 1;
     }
+    
+    public ArrayList<Aluno> listarAlunos(){
+        return lstAlunos;
+    }
+    
+    public ArrayList<Professor> listarProfessores(){
+        return lstProfessores;
+    }
 }
