@@ -5,9 +5,13 @@ C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cdp\Mat
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cdp\Pessoa.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cdp\Professor.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cdp\Turma.java
+C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgd\AlunoDAO.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgd\Conexao.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgd\CursoDAO.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgd\CursoService.java
+C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgd\MatriculaDAO.java
+C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgd\ProfessorDAO.java
+C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgd\TurmaDAO.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgt\AplGerenciarCurso.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\cgt\AplGerenciarPessoas.java
 C:\Users\isama\Documents\GitHub\tarefa_aps_2021\TAREFA_APS\src\main\java\ciu\JanCadAluno.java
