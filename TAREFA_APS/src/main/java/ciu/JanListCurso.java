@@ -8,6 +8,7 @@ import cci.ControladorPrincipal;
 // import cgt.AplGerenciarPessoas; // kept compatible with controller but not used
 import cgd.CursoService;
 import cdp.Curso;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class JanListCurso extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -61,7 +62,7 @@ public class JanListCurso extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Carga Horária"
+                "ID", "Nome", "CH"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -120,12 +121,22 @@ public class JanListCurso extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void recarregarDados() {
+        carregarDados();
+    }
+
     private void carregarDados() {
         try {
             cursos = cursoService.listarTodos();
             if (cursos == null) cursos = new ArrayList<>();
         } catch (Exception ex) {
             cursos = new ArrayList<>();
+            JOptionPane.showMessageDialog(
+                this,
+                "Não foi possível carregar a lista de cursos.\n" + ex.getMessage(),
+                "Erro ao listar cursos",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
 
         preencherTabela();

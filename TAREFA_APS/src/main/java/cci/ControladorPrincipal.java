@@ -106,6 +106,8 @@ public class ControladorPrincipal {
         
         if (janListCurso == null)
             janListCurso = new JanListCurso(aplGerenciarPessoas);
+        else
+            janListCurso.recarregarDados();
         janPrincipal.setVisible(false);
         janListCurso.setVisible(true);
     }
