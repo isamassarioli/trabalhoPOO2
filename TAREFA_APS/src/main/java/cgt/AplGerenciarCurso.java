@@ -26,6 +26,7 @@ public class AplGerenciarCurso {
     public int criarTurma(String horario, int limiteAlunos, boolean fechada, Date dataInicio, Date dataFim){
         if (horario.length()>3){
             Turma novaTurma = new Turma(horario, limiteAlunos, fechada, dataInicio, dataFim);
+            turmaDAO.save(novaTurma);
             return 0;
         }
         else
