@@ -1,4 +1,3 @@
-//Isadora, João Antônio, Ana Luiza e João Gabriel//
 
 package cci;
 
