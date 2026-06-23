@@ -3,6 +3,7 @@ package cgd;
 import cdp.Aluno;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 public class AlunoDAO {
@@ -28,7 +29,13 @@ public class AlunoDAO {
     public Aluno get(long cpf) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.find(Aluno.class, cpf);
+            TypedQuery<Aluno> query = em.createQuery(
+                "SELECT DISTINCT a FROM Aluno a LEFT JOIN FETCH a.turmas WHERE a.CPF = :cpf",
+                Aluno.class
+            );
+            query.setParameter("cpf", cpf);
+            List<Aluno> result = query.getResultList();
+            return result.isEmpty() ? null : result.get(0);
         } finally {
             em.close();
         }
@@ -37,7 +44,52 @@ public class AlunoDAO {
     public List<Aluno> getAll() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a", Aluno.class);
+            TypedQuery<Aluno> query = em.createQuery(
+                "SELECT DISTINCT a FROM Aluno a LEFT JOIN FETCH a.turmas",
+                Aluno.class
+            );
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Aluno> findByNome(String nome) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Aluno> query = em.createQuery(
+                "SELECT DISTINCT a FROM Aluno a LEFT JOIN FETCH a.turmas WHERE LOWER(a.nome) LIKE LOWER(:nome)",
+                Aluno.class
+            );
+            query.setParameter("nome", "%" + nome + "%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Aluno> findByCpf(long cpf) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Aluno> query = em.createQuery(
+                "SELECT DISTINCT a FROM Aluno a LEFT JOIN FETCH a.turmas WHERE a.CPF = :cpf",
+                Aluno.class
+            );
+            query.setParameter("cpf", cpf);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Aluno> findByDataNascimento(Date dataNascimento) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Aluno> query = em.createQuery(
+                "SELECT DISTINCT a FROM Aluno a LEFT JOIN FETCH a.turmas WHERE a.dataNascimento = :dataNascimento",
+                Aluno.class
+            );
+            query.setParameter("dataNascimento", dataNascimento);
             return query.getResultList();
         } finally {
             em.close();

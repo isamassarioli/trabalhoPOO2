@@ -38,11 +38,11 @@ public class Turma {
     private Date dataFim;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "curso_id")
+    @JoinColumn(name = "id_curso")
     private Curso curso;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "professor_cpf", referencedColumnName = "cpf")
+    @JoinColumn(name = "cpf_professor", referencedColumnName = "cpf")
     private Professor professor;
 
     @ManyToMany
@@ -60,7 +60,7 @@ public class Turma {
         this.dataInicio = dataInicio;
         this.fechada = fechada;
         this.horario = horario;
-        this.limiteAlunos = 40;
+        this.limiteAlunos = limiteAlunos;
         this.alunos = new ArrayList<>();
     }
 
@@ -143,5 +143,16 @@ public class Turma {
 
     public void removerAluno(Aluno aluno) {
         alunos.remove(aluno);
+    }
+
+    @Override
+    public String toString() {
+        String nomeProfessor = professor != null ? professor.getNome() : "sem professor";
+        String nomeCurso = curso != null ? curso.getNomeCurso() : "sem curso";
+        return "Turma " + id + " - " + horario + " - " + nomeCurso + " - " + nomeProfessor;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

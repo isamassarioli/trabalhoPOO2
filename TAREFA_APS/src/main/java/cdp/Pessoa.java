@@ -58,4 +58,9 @@ public class Pessoa {
     public void setCPF(long CPF) {
         this.CPF = CPF;
     }
+
+    @Override
+    public String toString() {
+        return nome + " - " + CPF;
+    }
 }

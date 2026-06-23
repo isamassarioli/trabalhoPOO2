@@ -60,12 +60,12 @@ public class JanListCurso extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "CH"
+                "ID", "Nome", "CH", "Turmas"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -148,8 +148,20 @@ public class JanListCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaActionPerformed
-        // TODO add your handling code here:
+        String criterio = (String) jComboBoxPesquisa.getSelectedItem();
+        String valor = jTextFieldPesquisa.getText();
+
+        cursos = cursoService.buscarCursos(criterio, valor);
+        if (cursos == null) {
+            cursos = new ArrayList<>();
+        }
+
+        preencherTabela();
     }//GEN-LAST:event_jButtonPesquisaActionPerformed
+
+    private void jTextFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonPesquisaActionPerformed(evt);
+    }
 
     public void recarregarDados() {
         carregarDados();
@@ -180,7 +192,8 @@ public class JanListCurso extends javax.swing.JFrame {
             Object[] linha = {
                 curso.getId(),
                 curso.getNomeCurso(),
-                curso.getChCurso()
+                curso.getChCurso(),
+                curso.getTurmas() != null ? curso.getTurmas().size() : 0
             };
             model.addRow(linha);
         }

@@ -29,7 +29,15 @@ public class TurmaDAO {
     public Turma get(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.find(Turma.class, id);
+            TypedQuery<Turma> query = em.createQuery(
+                "SELECT DISTINCT t FROM Turma t " +
+                "JOIN FETCH t.curso " +
+                "JOIN FETCH t.professor " +
+                "LEFT JOIN FETCH t.alunos " +
+                "WHERE t.id = :id", Turma.class);
+            query.setParameter("id", (long) id);
+            List<Turma> result = query.getResultList();
+            return result.isEmpty() ? null : result.get(0);
         } finally {
             em.close();
         }
@@ -38,7 +46,11 @@ public class TurmaDAO {
     public List<Turma> getAll() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            TypedQuery<Turma> query = em.createQuery("SELECT t FROM Turma t", Turma.class);
+            TypedQuery<Turma> query = em.createQuery(
+                "SELECT DISTINCT t FROM Turma t " +
+                "JOIN FETCH t.curso " +
+                "JOIN FETCH t.professor " +
+                "LEFT JOIN FETCH t.alunos", Turma.class);
             return query.getResultList();
         } finally {
             em.close();

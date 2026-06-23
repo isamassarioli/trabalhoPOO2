@@ -28,7 +28,13 @@ public class CursoDAO {
     public Curso get(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.find(Curso.class, id);
+            TypedQuery<Curso> query = em.createQuery(
+                "SELECT DISTINCT c FROM Curso c LEFT JOIN FETCH c.turmas WHERE c.id = :id",
+                Curso.class
+            );
+            query.setParameter("id", id);
+            List<Curso> result = query.getResultList();
+            return result.isEmpty() ? null : result.get(0);
         } finally {
             em.close();
         }
@@ -37,7 +43,52 @@ public class CursoDAO {
     public List<Curso> getAll() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            TypedQuery<Curso> query = em.createQuery("SELECT c FROM Curso c", Curso.class);
+            TypedQuery<Curso> query = em.createQuery(
+                "SELECT DISTINCT c FROM Curso c LEFT JOIN FETCH c.turmas",
+                Curso.class
+            );
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Curso> findById(int id) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Curso> query = em.createQuery(
+                "SELECT DISTINCT c FROM Curso c LEFT JOIN FETCH c.turmas WHERE c.id = :id",
+                Curso.class
+            );
+            query.setParameter("id", id);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Curso> findByNome(String nome) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Curso> query = em.createQuery(
+                "SELECT DISTINCT c FROM Curso c LEFT JOIN FETCH c.turmas WHERE LOWER(c.nome) LIKE LOWER(:nome)",
+                Curso.class
+            );
+            query.setParameter("nome", "%" + nome + "%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Curso> findByCargaHoraria(int cargaHoraria) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Curso> query = em.createQuery(
+                "SELECT DISTINCT c FROM Curso c LEFT JOIN FETCH c.turmas WHERE c.cargaHoraria = :cargaHoraria",
+                Curso.class
+            );
+            query.setParameter("cargaHoraria", cargaHoraria);
             return query.getResultList();
         } finally {
             em.close();

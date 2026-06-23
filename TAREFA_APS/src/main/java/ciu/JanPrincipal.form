@@ -98,6 +98,14 @@
                 <Property name="text" type="java.lang.String" value="Listar Cursos"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemGradeCurso1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Listar Turmas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemGradeCurso1ActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

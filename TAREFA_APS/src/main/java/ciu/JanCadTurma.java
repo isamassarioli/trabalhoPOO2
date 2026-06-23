@@ -5,7 +5,14 @@
 package ciu;
 
 import cci.ControladorPrincipal;
-import java.awt.event.MouseEvent;
+import cgt.AplGerenciarCurso;
+import cgt.AplGerenciarPessoas;
+import cdp.Curso;
+import cdp.Professor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,13 +22,24 @@ public class JanCadTurma extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JanCadTurma.class.getName());
     private cci.ControladorPrincipal controlador;
+    private final AplGerenciarCurso aplCurso;
+    private final AplGerenciarPessoas aplPessoas;
+    private List<Curso> cursos;
+    private List<Professor> professores;
 
     /**
      * Creates new form JanCadTurmaa
      */
     public JanCadTurma(ControladorPrincipal controlador) {
+        this(controlador, new AplGerenciarCurso(), new AplGerenciarPessoas());
+    }
+
+    public JanCadTurma(ControladorPrincipal controlador, AplGerenciarCurso aplCurso, AplGerenciarPessoas aplPessoas) {
         this.controlador = controlador;
+        this.aplCurso = aplCurso;
+        this.aplPessoas = aplPessoas;
         initComponents();
+        carregarCombos();
     }
 
     /**
@@ -45,6 +63,10 @@ public class JanCadTurma extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jComboBoxCurso = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 204));
@@ -100,6 +122,11 @@ public class JanCadTurma extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxCurso.setModel(new javax.swing.DefaultComboBoxModel<>());
+        jLabel5.setText("Curso");
+
+        jLabel6.setText("Professor");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,30 +140,43 @@ public class JanCadTurma extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -153,11 +193,15 @@ public class JanCadTurma extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,25 +224,10 @@ public class JanCadTurma extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            String horario = jComboBox1.getSelectedItem().toString();
-            java.sql.Date inicio = java.sql.Date.valueOf(jTextField2.getText());
-            java.sql.Date fim = java.sql.Date.valueOf(jTextField3.getText());
-            int limite = Integer.parseInt(jTextField4.getText());
-            boolean fechada = jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Fechada");
-            controlador.cadastrarTurma(horario, limite, fechada, inicio, fim);
-        } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro nos dados da turma: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField4.setText("");
-        
-
     }//GEN-LAST:event_jTextField2MouseClicked
 
     private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
@@ -210,16 +239,72 @@ public class JanCadTurma extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void recarregarDados() {
+        carregarCombos();
+    }
+
+    private void carregarCombos() {
+        cursos = aplCurso.listarCursos();
+        professores = aplCurso.listarProfessores();
+        if (cursos == null) {
+            cursos = new ArrayList<>();
+        }
+        if (professores == null) {
+            professores = new ArrayList<>();
+        }
+
+        jComboBoxCurso.setModel(new DefaultComboBoxModel<Curso>(cursos.toArray(new Curso[0])));
+        jComboBox3.setModel(new DefaultComboBoxModel<Professor>(professores.toArray(new Professor[0])));
+
+        if (cursos.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há cursos cadastrados ainda. Crie um curso antes de montar a turma.",
+                "Sem cursos",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            String horario = jComboBox1.getSelectedItem().toString();
+            java.sql.Date inicio = java.sql.Date.valueOf(jTextField2.getText());
+            java.sql.Date fim = java.sql.Date.valueOf(jTextField3.getText());
+            int limite = Integer.parseInt(jTextField4.getText());
+            boolean fechada = jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Fechada");
+            Curso curso = (Curso) jComboBoxCurso.getSelectedItem();
+            Professor professor = (Professor) jComboBox3.getSelectedItem();
+
+            if (curso == null) {
+                JOptionPane.showMessageDialog(this, "Selecione um curso.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (professor == null) {
+                JOptionPane.showMessageDialog(this, "Selecione um professor.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            controlador.cadastrarTurma(horario, limite, fechada, inicio, fim, curso.getId(), professor.getCPF());
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro nos dados da turma: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<Curso> jComboBoxCurso;
+    private javax.swing.JComboBox<Professor> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

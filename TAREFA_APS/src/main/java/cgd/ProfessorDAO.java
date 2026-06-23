@@ -3,6 +3,7 @@ package cgd;
 import cdp.Professor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 public class ProfessorDAO {
@@ -38,6 +39,62 @@ public class ProfessorDAO {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Professor> query = em.createQuery("SELECT p FROM Professor p", Professor.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Professor> findByNome(String nome) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Professor> query = em.createQuery(
+                "SELECT p FROM Professor p WHERE LOWER(p.nome) LIKE LOWER(:nome)",
+                Professor.class
+            );
+            query.setParameter("nome", "%" + nome + "%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Professor> findByCpf(long cpf) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Professor> query = em.createQuery(
+                "SELECT p FROM Professor p WHERE p.CPF = :cpf",
+                Professor.class
+            );
+            query.setParameter("cpf", cpf);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Professor> findByTitulacao(String titulacao) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Professor> query = em.createQuery(
+                "SELECT p FROM Professor p WHERE LOWER(p.titulacao) LIKE LOWER(:titulacao)",
+                Professor.class
+            );
+            query.setParameter("titulacao", "%" + titulacao + "%");
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Professor> findByDataNascimento(Date dataNascimento) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            TypedQuery<Professor> query = em.createQuery(
+                "SELECT p FROM Professor p WHERE p.dataNascimento = :dataNascimento",
+                Professor.class
+            );
+            query.setParameter("dataNascimento", dataNascimento);
             return query.getResultList();
         } finally {
             em.close();

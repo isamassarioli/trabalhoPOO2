@@ -7,6 +7,7 @@ package ciu;
 import cci.ControladorPrincipal;
 import cgt.AplGerenciarPessoas;
 import cdp.Aluno;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +37,10 @@ public class JanListAluno extends javax.swing.JFrame {
         carregarDados();
     }
 
+    public void recarregarDados() {
+        carregarDados();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,12 +64,12 @@ public class JanListAluno extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nome", "CPF", "Nascimento"
+                "Nome", "CPF", "Nascimento", "Turmas"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -158,15 +163,27 @@ public class JanListAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaActionPerformed
-        // TODO add your handling code here:
+        if (apl == null) {
+            apl = new AplGerenciarPessoas();
+        }
+
+        String criterio = (String) jComboBoxPesquisa.getSelectedItem();
+        String valor = jTextFieldPesquisa.getText();
+
+        alunos = apl.buscarAlunos(criterio, valor);
+        if (alunos == null) {
+            alunos = new ArrayList<>();
+        }
+
+        preencherTabela();
     }//GEN-LAST:event_jButtonPesquisaActionPerformed
 
     private void jTextFieldPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaActionPerformed
-        // TODO add your handling code here:
+        jButtonPesquisaActionPerformed(evt);
     }//GEN-LAST:event_jTextFieldPesquisaActionPerformed
 
     private void jComboBoxPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPesquisaActionPerformed
-        // TODO add your handling code here:
+        jTextFieldPesquisa.requestFocusInWindow();
     }//GEN-LAST:event_jComboBoxPesquisaActionPerformed
 
     private void carregarDados() {
@@ -189,7 +206,8 @@ public class JanListAluno extends javax.swing.JFrame {
             Object[] linha = {
                 aluno.getNome(),
                 aluno.getCPF(),
-                sdf.format(aluno.getDataNascimento())
+                sdf.format(aluno.getDataNascimento()),
+                aluno.getTurmas() != null ? aluno.getTurmas().size() : 0
             };
             model.addRow(linha);
         }

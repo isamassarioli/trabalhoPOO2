@@ -33,10 +33,10 @@ CREATE TABLE turma (
     fechada boolean NOT NULL DEFAULT false,
     data_inicio date NOT NULL,
     data_fim date NOT NULL,
-    curso_id int NOT NULL,
-    professor_cpf bigint NOT NULL,
-    FOREIGN KEY (curso_id) REFERENCES curso(id) ON DELETE CASCADE,
-    FOREIGN KEY (professor_cpf) REFERENCES professor(cpf) ON DELETE CASCADE
+    id_curso int NOT NULL,
+    cpf_professor bigint NOT NULL,
+    FOREIGN KEY (id_curso) REFERENCES curso(id) ON DELETE CASCADE,
+    FOREIGN KEY (cpf_professor) REFERENCES professor(cpf) ON DELETE CASCADE
 );
 
 -- Tabela turma_alunos (relação muitos-para-muitos entre Turma e Aluno, sem atributos de matrícula)

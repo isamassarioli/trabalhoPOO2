@@ -2,6 +2,8 @@ package cgd;
 
 import cdp.Curso;
 import java.util.List;
+import java.util.ArrayList;
+import java.text.Normalizer;
 
 public class CursoService {
 
@@ -35,6 +37,45 @@ public class CursoService {
     public List<Curso> listarTodos() {
         CursoDAO cdao = new CursoDAO();
         return cdao.getAll();
+    }
+
+    public List<Curso> buscarCursos(String criterio, String valor) {
+        if (valor == null || valor.trim().isEmpty()) {
+            return listarTodos();
+        }
+
+        CursoDAO cdao = new CursoDAO();
+        String pesquisa = valor.trim();
+        String campo = normalizar(criterio);
+
+        switch (campo) {
+            case "id":
+                try {
+                    return cdao.findById(Integer.parseInt(pesquisa));
+                } catch (NumberFormatException ex) {
+                    return new ArrayList<>();
+                }
+            case "nome":
+                return cdao.findByNome(pesquisa);
+            case "ch":
+                try {
+                    return cdao.findByCargaHoraria(Integer.parseInt(pesquisa));
+                } catch (NumberFormatException ex) {
+                    return new ArrayList<>();
+                }
+            default:
+                return listarTodos();
+        }
+    }
+
+    private String normalizar(String valor) {
+        if (valor == null) {
+            return "";
+        }
+
+        String semAcentos = Normalizer.normalize(valor, Normalizer.Form.NFD)
+            .replaceAll("\\p{M}", "");
+        return semAcentos.trim().toLowerCase();
     }
 
     public Curso obter(int id) {
