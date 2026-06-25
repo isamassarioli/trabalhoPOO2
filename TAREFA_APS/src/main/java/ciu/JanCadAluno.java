@@ -11,6 +11,7 @@ import cci.ControladorPrincipal;
  * @author 2024122760199
  */
 public class JanCadAluno extends javax.swing.JFrame {
+    private javax.swing.JMenuItem jMenuItemRelatorio;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JanCadAluno.class.getName());
     private cci.ControladorPrincipal controlador;

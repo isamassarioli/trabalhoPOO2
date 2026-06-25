@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class JanListAluno extends javax.swing.JFrame {
     
+    private javax.swing.JMenuItem jMenuItemRelatorio;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JanListAluno.class.getName());
     private List<Aluno> alunos;
     private AplGerenciarPessoas apl;

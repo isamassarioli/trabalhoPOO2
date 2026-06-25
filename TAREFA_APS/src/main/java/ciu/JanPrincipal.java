@@ -42,12 +42,12 @@ public class JanPrincipal extends javax.swing.JFrame {
         jMenuItemCurso = new javax.swing.JMenuItem();
         jMenuItemProf = new javax.swing.JMenuItem();
         jMenuItemTurma = new javax.swing.JMenuItem();
-        jMenuItemAlunoTurma = new javax.swing.JMenuItem();
         jMenuConsultas = new javax.swing.JMenu();
         jMenuItemAlunoList = new javax.swing.JMenuItem();
         jMenuItemProfList = new javax.swing.JMenuItem();
         jMenuItemGradeCurso = new javax.swing.JMenuItem();
         jMenuItemGradeCurso1 = new javax.swing.JMenuItem();
+        jMenuItemRelatorio = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -100,14 +100,6 @@ public class JanPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastrar.add(jMenuItemTurma);
 
-        jMenuItemAlunoTurma.setText("Aluno em Turma");
-        jMenuItemAlunoTurma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAlunoTurmaActionPerformed(evt);
-            }
-        });
-        jMenuCadastrar.add(jMenuItemAlunoTurma);
-
         jMenuBar1.add(jMenuCadastrar);
 
         jMenuConsultas.setText("Consultas");
@@ -121,19 +113,9 @@ public class JanPrincipal extends javax.swing.JFrame {
         jMenuConsultas.add(jMenuItemAlunoList);
 
         jMenuItemProfList.setText("Listar Professores");
-        jMenuItemProfList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemProfListActionPerformed(evt);
-            }
-        });
         jMenuConsultas.add(jMenuItemProfList);
 
         jMenuItemGradeCurso.setText("Listar Cursos");
-        jMenuItemGradeCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemGradeCursoActionPerformed(evt);
-            }
-        });
         jMenuConsultas.add(jMenuItemGradeCurso);
 
         jMenuItemGradeCurso1.setText("Listar Turmas");
@@ -143,6 +125,14 @@ public class JanPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuConsultas.add(jMenuItemGradeCurso1);
+
+        jMenuItemRelatorio.setText("Relatório");
+        jMenuItemRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelatorioActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuItemRelatorio);
 
         jMenuBar1.add(jMenuConsultas);
 
@@ -199,6 +189,11 @@ public class JanPrincipal extends javax.swing.JFrame {
         ControladorPrincipal.exibirJanCadAlunoTurma();
     }//GEN-LAST:event_jMenuItemAlunoTurmaActionPerformed
 
+    private void jMenuItemRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioActionPerformed
+    new cgt.GeradorRelatorio().abrirRelatorio();
+    jMenuConsultas.add(jMenuItemRelatorio);
+    }//GEN-LAST:event_jMenuItemRelatorioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -211,12 +206,12 @@ public class JanPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItemAluno;
     private javax.swing.JMenuItem jMenuItemAlunoList;
-    private javax.swing.JMenuItem jMenuItemAlunoTurma;
     private javax.swing.JMenuItem jMenuItemCurso;
     private javax.swing.JMenuItem jMenuItemGradeCurso;
     private javax.swing.JMenuItem jMenuItemGradeCurso1;
     private javax.swing.JMenuItem jMenuItemProf;
     private javax.swing.JMenuItem jMenuItemProfList;
+    private javax.swing.JMenuItem jMenuItemRelatorio;
     private javax.swing.JMenuItem jMenuItemTurma;
     private javax.swing.JOptionPane jOptionPane1;
     // End of variables declaration//GEN-END:variables

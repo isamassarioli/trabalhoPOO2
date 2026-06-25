@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class JanListCurso extends javax.swing.JFrame {
     
+    private javax.swing.JMenuItem jMenuItemRelatorio;
+    
     private List<Curso> cursos;
     private CursoService cursoService;
 

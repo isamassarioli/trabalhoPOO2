@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class JanCadTurma extends javax.swing.JFrame {
     
+    private javax.swing.JMenuItem jMenuItemRelatorio;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JanCadTurma.class.getName());
     private cci.ControladorPrincipal controlador;
     private final AplGerenciarCurso aplCurso;

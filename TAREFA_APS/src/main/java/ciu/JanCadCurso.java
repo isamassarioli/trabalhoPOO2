@@ -8,6 +8,8 @@ import cci.ControladorPrincipal;
  */
 public class JanCadCurso extends javax.swing.JFrame {
     
+    private javax.swing.JMenuItem jMenuItemRelatorio;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JanCadCurso.class.getName());
     private cci.ControladorPrincipal controlador;
 

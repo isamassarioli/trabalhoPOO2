@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  * @author isama
  */
 public class JanListTurma extends javax.swing.JFrame {
+    
+    private javax.swing.JMenuItem jMenuItemRelatorio;
 
     private final AplGerenciarCurso aplCurso;
     private List<Turma> turmas;

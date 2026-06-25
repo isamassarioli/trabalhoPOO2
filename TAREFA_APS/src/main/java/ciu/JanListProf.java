@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class JanListProf extends javax.swing.JFrame {
     
+    private javax.swing.JMenuItem jMenuItemRelatorio;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JanListProf.class.getName());
     private List<Professor> professores;
     private AplGerenciarPessoas apl;
