@@ -54,9 +54,9 @@ ciu\JanListTurma$2.class
 ciu\JanCadProfessor$6.class
 ciu\JanListAluno$4.class
 ciu\JanCadProfessor$9.class
-ciu\JanPrincipal$8.class
 cdp\Aluno.class
 ciu\JanCadAlunoTurma$2.class
+cgt\GeradorRelatorio.class
 ciu\JanCadAluno$8.class
 ciu\JanCadAluno$7.class
 ciu\JanCadCurso$3.class
@@ -75,4 +75,3 @@ ciu\JanCadTurma.class
 ciu\JanListAluno$3.class
 cgt\AplGerenciarCurso.class
 ciu\JanCadProfessor$5.class
-ciu\JanPrincipal$9.class

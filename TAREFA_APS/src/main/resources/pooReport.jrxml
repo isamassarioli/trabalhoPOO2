@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Academico Report" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="829ace2d-45a7-4fb9-9c1a-1894288ca936">
+	<property name="ireport.zoom" value="0.7513148009015777"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="TOTAL_ALUNOS" uuid="be1dca0c-43e0-4329-8aac-b5aa9aa79a6e">
+		<queryString language="SQL">
+			<![CDATA[select *
+from pessoa p
+where p.cpf = (
+	select a.cpf
+	from aluno a
+	where a.cpf = p.cpf
+	order by p.nome
+)
+]]>
+		</queryString>
+		<field name="cpf" class="java.lang.Long"/>
+		<field name="nome" class="java.lang.String"/>
+		<field name="data_nascimento" class="java.sql.Date"/>
+		<group name="nome">
+			<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+		</group>
+		<group name="cpf">
+			<groupExpression><![CDATA[$F{cpf}]]></groupExpression>
+		</group>
+		<group name="data_nascimento">
+			<groupExpression><![CDATA[$F{data_nascimento}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cpf" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="data_nascimento" class="java.sql.Date"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="126" splitType="Stretch">
+			<textField>
+				<reportElement x="132" y="19" width="550" height="78" uuid="78880c47-f92f-41c0-bc9b-6db74b0bf5ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="50" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Sistema Acadêmico]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="170" splitType="Stretch">
+			<textField>
+				<reportElement x="248" y="73" width="100" height="20" uuid="f3bc1cbf-9a73-490e-8a7f-32dd17203c22"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="348" y="73" width="100" height="20" uuid="c9be04e5-a20b-436a-825c-177930c6fdd3"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="73" width="100" height="20" uuid="36a09a5a-352b-456e-b657-a6f25736ca62"/>
+				<textFieldExpression><![CDATA[$F{datanascimento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

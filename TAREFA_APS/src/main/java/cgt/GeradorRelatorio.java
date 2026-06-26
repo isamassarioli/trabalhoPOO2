@@ -13,7 +13,7 @@ public class GeradorRelatorio {
 
     public void abrirRelatorio() {
         try (
-            Connection conexao = new Conexao("meu_exemplo", "postgres", "isadora").getConnection();
+            Connection conexao = new Conexao("meu_exemplo", "postgres", "postgre").getConnection();
             InputStream relatorio = getClass().getResourceAsStream("/pooReport.jasper")
         ) {
             if (relatorio == null) {
