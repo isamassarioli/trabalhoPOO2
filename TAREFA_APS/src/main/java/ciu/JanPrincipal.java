@@ -47,7 +47,7 @@ public class JanPrincipal extends javax.swing.JFrame {
         jMenuItemProfList = new javax.swing.JMenuItem();
         jMenuItemGradeCurso = new javax.swing.JMenuItem();
         jMenuItemGradeCurso1 = new javax.swing.JMenuItem();
-        jMenuItemRelatorio = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -126,13 +126,13 @@ public class JanPrincipal extends javax.swing.JFrame {
         });
         jMenuConsultas.add(jMenuItemGradeCurso1);
 
-        jMenuItemRelatorio.setText("Relatório");
-        jMenuItemRelatorio.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Relatório");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemRelatorioActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenuConsultas.add(jMenuItemRelatorio);
+        jMenuConsultas.add(jMenuItem1);
 
         jMenuBar1.add(jMenuConsultas);
 
@@ -189,10 +189,10 @@ public class JanPrincipal extends javax.swing.JFrame {
         ControladorPrincipal.exibirJanCadAlunoTurma();
     }//GEN-LAST:event_jMenuItemAlunoTurmaActionPerformed
 
-    private void jMenuItemRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioActionPerformed
-    new cgt.GeradorRelatorio().abrirRelatorio();
-    jMenuConsultas.add(jMenuItemRelatorio);
-    }//GEN-LAST:event_jMenuItemRelatorioActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new cgt.GeradorRelatorio().abrirRelatorio("pooReport.jrxml");
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -201,6 +201,7 @@ public class JanPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCadastrar;
     private javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenu jMenuHome;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
@@ -211,7 +212,6 @@ public class JanPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemGradeCurso1;
     private javax.swing.JMenuItem jMenuItemProf;
     private javax.swing.JMenuItem jMenuItemProfList;
-    private javax.swing.JMenuItem jMenuItemRelatorio;
     private javax.swing.JMenuItem jMenuItemTurma;
     private javax.swing.JOptionPane jOptionPane1;
     // End of variables declaration//GEN-END:variables

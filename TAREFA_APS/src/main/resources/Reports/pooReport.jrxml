@@ -1,0 +1,204 @@
+<!-- Created with Jaspersoft Studio version 7.0.6.final using JasperReports Library version 7.0.6-5d2a603fdc6b3db8f842a83383e594f41891534d  -->
+<jasperReport name="Academico Report" language="java" columnCount="1" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="829ace2d-45a7-4fb9-9c1a-1894288ca936">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="114"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="633"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="353"/>
+	<dataset name="ACADEMICO" uuid="cd9b3654-23bb-4754-9aa8-5666e0e02ca2">
+		<property name="com.jaspersoft.studio.data.sql.tables" value="cGVzc29hICwxMjIsMjAsZDkyMDMzYmEtYjgxNy00MDI4LTgxNmMtNzFkYTIwYmY1NGYzO2FsdW5v&#xa;ICwyMCw0NyxiZTk1ZWQyZS0yMzJlLTQ1OWYtYjJiNC1jM2VhMzNkYTExMmI7"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+		<query language="SQL"><![CDATA[SELECT pessoa.nome,
+	pessoa.cpf,
+	pessoa.data_nascimento
+FROM pessoa
+	join aluno ON 
+	 aluno.cpf = pessoa.cpf]]></query>
+		<field name="nome" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nome"/>
+			<property name="com.jaspersoft.studio.field.label" value="nome"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+		</field>
+		<field name="cpf" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="cpf"/>
+			<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+		</field>
+		<field name="data_nascimento" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="data_nascimento"/>
+			<property name="com.jaspersoft.studio.field.label" value="data_nascimento"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+		</field>
+		<group name="nome">
+			<expression><![CDATA[$F{nome}]]></expression>
+		</group>
+		<group name="cpf">
+			<expression><![CDATA[$F{cpf}]]></expression>
+		</group>
+		<group name="data_nascimento">
+			<expression><![CDATA[$F{data_nascimento}]]></expression>
+		</group>
+	</dataset>
+	<parameter name="PARAM_PAINEL" class="java.lang.Object"/>
+	<parameter name="PARAM_LOGO" class="java.lang.Object"/>
+	<query language="sql"><![CDATA[SELECT 
+    t.id AS turma_id,
+    t.horario,
+    t.limite_alunos,
+    t.data_inicio,
+    t.data_fim,
+    t.fechada,
+    c.id AS curso_id,
+    c.nome AS curso_nome,
+    c.carga_horaria,
+    p_prof.nome AS professor_nome,
+    prof.titulacao,
+    COUNT(ta.aluno_cpf) AS qtd_alunos
+FROM turma t
+INNER JOIN curso c 
+    ON c.id = t.id_curso
+INNER JOIN professor prof 
+    ON prof.cpf = t.cpf_professor
+INNER JOIN pessoa p_prof 
+    ON prof.cpf = p_prof.cpf
+LEFT JOIN turma_alunos ta 
+    ON t.id = ta.turma_id
+GROUP BY 
+    t.id, 
+    t.horario, 
+    t.limite_alunos, 
+    t.data_inicio, 
+    t.data_fim, 
+    t.fechada,
+    c.id, 
+    c.nome, 
+    c.carga_horaria, 
+    p_prof.nome, 
+    prof.titulacao;]]></query>
+	<field name="turma_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="turma_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="turma_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="turma"/>
+	</field>
+	<field name="horario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="horario"/>
+		<property name="com.jaspersoft.studio.field.label" value="horario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="turma"/>
+	</field>
+	<field name="limite_alunos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="limite_alunos"/>
+		<property name="com.jaspersoft.studio.field.label" value="limite_alunos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="turma"/>
+	</field>
+	<field name="data_inicio" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="data_inicio"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_inicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="turma"/>
+	</field>
+	<field name="data_fim" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="data_fim"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_fim"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="turma"/>
+	</field>
+	<field name="fechada" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="fechada"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="turma"/>
+	</field>
+	<field name="curso_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="curso_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="curso_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="curso"/>
+	</field>
+	<field name="curso_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="curso_nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="curso_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="curso"/>
+	</field>
+	<field name="carga_horaria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="carga_horaria"/>
+		<property name="com.jaspersoft.studio.field.label" value="carga_horaria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="curso"/>
+	</field>
+	<field name="professor_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="professor_nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="professor_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="titulacao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="professor"/>
+	</field>
+	<field name="qtd_alunos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="qtd_alunos"/>
+		<property name="com.jaspersoft.studio.field.label" value="qtd_alunos"/>
+	</field>
+	<background height="484" splitType="Stretch">
+		<element kind="image" uuid="35e7de97-9473-404e-a29e-d89ea5326475" x="78" y="0" width="647" height="460">
+			<expression><![CDATA[$P{PARAM_PAINEL}]]></expression>
+		</element>
+	</background>
+	<title height="126" splitType="Stretch">
+		<element kind="image" uuid="fd5672e7-fb2c-4fde-b543-f89166536ebb" x="300" y="40" width="202" height="68">
+			<expression><![CDATA[$P{PARAM_LOGO}]]></expression>
+		</element>
+	</title>
+	<pageHeader height="69" splitType="Stretch">
+		<element kind="staticText" uuid="b13171b4-8ac1-4149-bc79-33b711988b7c" x="190" y="9" width="450" height="51" fontSize="30.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[TURMAS EXISTENTES]]></text>
+		</element>
+	</pageHeader>
+	<columnHeader height="39" splitType="Stretch">
+		<element kind="staticText" uuid="0376cf41-d5e8-4acb-a63d-88469e5259c3" x="10" y="14" width="100" height="20" bold="true">
+			<text><![CDATA[ID Turma]]></text>
+		</element>
+		<element kind="staticText" uuid="614f9255-ce78-49a7-9ee8-588382366680" x="100" y="14" width="100" height="20" bold="true">
+			<text><![CDATA[Horário]]></text>
+		</element>
+		<element kind="staticText" uuid="680ffebf-9ff0-42ab-a09f-ea1bbe1a8b6a" x="170" y="14" width="100" height="20" bold="true">
+			<text><![CDATA[Curso]]></text>
+		</element>
+		<element kind="staticText" uuid="fa42cc9c-00b4-4c63-b239-6ba41c16e8a7" x="270" y="14" width="100" height="20" bold="true">
+			<text><![CDATA[Professor]]></text>
+		</element>
+		<element kind="staticText" uuid="3a6c6e8c-bbf0-435f-85da-64c5de43dd14" x="390" y="14" width="100" height="20" bold="true">
+			<text><![CDATA[Qtd. Alunos]]></text>
+		</element>
+		<element kind="staticText" uuid="d44ee7e4-7805-4ea7-8214-00bf57b0bcbc" x="510" y="14" width="100" height="20" bold="true">
+			<text><![CDATA[Fechada?]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<element kind="textField" uuid="f3bc1cbf-9a73-490e-8a7f-32dd17203c22" x="10" y="2" width="100" height="20">
+				<expression><![CDATA[$F{turma_id}]]></expression>
+			</element>
+			<element kind="textField" uuid="c9be04e5-a20b-436a-825c-177930c6fdd3" x="100" y="2" width="100" height="20">
+				<expression><![CDATA[$F{horario}]]></expression>
+			</element>
+			<element kind="textField" uuid="36a09a5a-352b-456e-b657-a6f25736ca62" x="170" y="2" width="100" height="20" pattern="dd/MM/yyyy">
+				<expression><![CDATA[$F{curso_nome}]]></expression>
+			</element>
+			<element kind="textField" uuid="d9f11efc-4c76-43b5-b905-4bebefcdb909" x="270" y="2" width="100" height="20" pattern="dd/MM/yyyy">
+				<expression><![CDATA[$F{professor_nome}]]></expression>
+			</element>
+			<element kind="textField" uuid="88025c68-d380-4103-a9d2-92d49a9166cf" x="390" y="2" width="100" height="20">
+				<expression><![CDATA[$F{qtd_alunos}]]></expression>
+			</element>
+			<element kind="textField" uuid="750b8419-62f0-496f-bdc7-6b75f699ffd1" x="510" y="2" width="100" height="20" pattern="dd/MM/yyyy">
+				<expression><![CDATA[$F{fechada}]]></expression>
+			</element>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="71" splitType="Stretch">
+		<element kind="textField" uuid="439bbe66-4a1d-4da7-99d9-670f3bd006fb" x="678" y="41" width="100" height="30">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>
